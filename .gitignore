@@ -1,0 +1,6 @@
+*.log
+.reset_lock
+anydesk_keys_backup.json
+anydesk_dump.exe
+AnyDesk.exe
+AnyDesk_real.exe

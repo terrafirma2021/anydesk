@@ -1,0 +1,23 @@
+#pragma autorecover
+#pragma namespace("\\\\.\\root\\subscription")
+
+instance of __EventFilter as $FILTER
+{
+    Name = "AnyDeskStart";
+    EventNamespace = "\\\\.\\root\\cimv2";
+    QueryLanguage = "WQL";
+    Query = "SELECT * FROM __InstanceCreationEvent WITHIN 1 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = 'AnyDesk.exe'";
+};
+
+instance of CommandLineEventConsumer as $CONSUMER
+{
+    Name = "AnyDeskReset";
+    WorkingDirectory = "C:\\Users\\643\\AppData\\Local\\Temp\\opencode\\anydesk";
+    CommandLineTemplate = "cmd /c python C:\\Users\\643\\AppData\\Local\\Temp\\opencode\\anydesk\\new_user.py >> C:\\Users\\643\\AppData\\Local\\Temp\\opencode\\anydesk\\new_user_run.log 2>&1";
+};
+
+instance of __FilterToConsumerBinding
+{
+    Filter = "AnyDeskStart";
+    Consumer = "AnyDeskReset";
+};
